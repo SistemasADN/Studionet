@@ -1,0 +1,182 @@
+@page {
+  margin: 0px;
+}
+
+body {
+  margin: 0px;
+}
+
+.canvas{
+  /*border: 1px solid #000000;*/
+  padding: 20px;
+}
+
+/*header divs----------------------------------------------------------------*/
+.header_main{
+    border-bottom: 1px solid #ddd;
+}
+th{
+  text-transform: uppercase;
+}
+.header_logo{
+  width: 50%;
+  float: left;
+}
+
+.data_client{
+  width: 50%;
+  float: right;
+}
+
+.field_set_client{
+  height: auto;
+  width: auto;
+  margin-top: 20px;
+  border: solid;
+  border-width: 2px;
+
+  border-color: #6A1B9A;
+  border-radius: 10px;
+}
+/*header END*/
+
+
+
+/*services list--------------------------------------------------------------*/
+.services_main{
+
+}
+/**/
+
+/*payment data---------------------------------------------------------------*/
+.payment_main{
+
+}
+/*payment data END*/
+
+/*field set for IMPORTANT! note----------------------------------------------*/
+.field_set_note{
+  height: auto;
+
+  width: 100%;
+
+  margin-top: 20px;
+  border: solid;
+  border-width: 2px;
+
+  border-color: #b71c1c;
+  border-radius: 10px;
+}
+
+.field_set_title_note{
+  text-align: center;
+  font-size: 16px;
+  color: #000000;
+  font-weight: bold;
+
+  border-radius: 8px 8px 0px 0px;
+  background: #f44336;
+}
+
+.th_note{
+  font-size: 12px;
+  text-align: center;
+}
+/*field set for IMPORTANT! note END*/
+
+/*field set for Small List*/
+.field_set_small{
+  height: auto;
+  margin-top: 20px;
+  border: solid;
+  border-width: 2px;
+
+  border-color: #1b5e20;
+  border-radius: 10px;
+}
+
+.field_set_title_small{
+  text-align: center;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: bold;
+
+  border-radius: 8px 8px 0px 0px;
+  background: #43a047;
+}
+
+.th_list_small{
+  width: 50%;
+  background: #81c784;
+  text-align: right;
+  font-weight: bold;
+  font-size: 16px;
+  color: #000000;
+}
+
+.td_list_small{
+  width: 50%;
+  font-size: 14px;
+  background: #c8e6c9;
+}
+/*field set for Small List END*/
+
+.field_set{
+  height: auto;
+  margin-top: 20px;
+  border: solid;
+  border-width: 2px;
+
+
+  border-color: #6A1B9A;
+
+  border-radius: 10px;
+}
+
+.field_set_title{
+  text-align: center;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: bold;
+
+  border-radius: 8px 8px 0px 0px;
+  background-color: #6A1B9A;
+
+}
+
+table{
+  width: 100%;
+}
+
+.th_list{
+  width: 50%;
+  background: #BA68C8;
+
+  text-align: right;
+  font-weight: bold;
+  font-size: 18px;
+  color: #FFFFFF;
+}
+
+.td_list{
+  width: 50%;
+  font-size: 16px;
+  background: #F3E5F5;
+}
+
+.th_row{
+  background:#BA68C8;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.td_row{
+  font-size: 16px;
+  text-align: center;
+  border-bottom: 1px solid #ffffff;
+}
+
+.half{
+  width:50%;
+}

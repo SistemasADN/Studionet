@@ -1,0 +1,4 @@
+nuget/content/
+nuget/bootstrap-fileinput.*.nupkg
+bancoImagenes/
+.DS_Store

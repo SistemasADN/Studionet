@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../css/listaalumnos.css" type="text/css">
+    <link rel="stylesheet" href="css/listaalumnos.css" type="text/css">
+</head>
+
+<body>
+
+    <div class="canvas">
+
+        <!--Page header-->
+        <div class="header_main">
+            <table>
+                <tr>
+                    <td class="header_logo">
+                        <img src="logo.png" height="175" width="250">
+                    </td>
+
+                    <td>
+                        <!--field_set Client data-->
+                        <div class="field_set_client">
+
+                            <div class="field_set_title">CARTA DE COBRO</div>
+
+                            <table>
+
+                                <tr>
+                                    <th class="th_list">
+                                        GRUPO:
+                                    </th>
+                                    <td class="td_list">[*grupo*]</td>
+                                </tr>
+
+                                <tr>
+                                    <th class="th_list">
+                                        PROFESOR PRINCIPAL:
+                                    </th>
+                                    <td class="td_list">[*profesorPrincipal*]</td>
+                                </tr>
+
+                                <tr>
+                                    <th class="th_list">
+                                        CLASE:
+                                    </th>
+                                    <td class="td_list">[*clase*]</td>
+                                </tr>
+
+                                <tr>
+                                    <th class="th_list">
+                                        NUMERO MAXIMO DE ALUMNOS:
+                                    </th>
+                                    <td class="td_list">[*numMaxAlumnos*]</td>
+                                </tr>
+
+                                <tr>
+                                    <th class="th_list">
+                                        ALUMNOS INSCRITOS
+                                    </th>
+                                    <td class="td_list">[*alumnosInscritos*]</td>
+                                </tr>
+
+
+
+
+
+                            </table>
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--Page header END-->
+
+        <div class="services_main">
+            <!--field_set Services / products-->
+            <div class="field_set">
+
+                <div class="field_set_title">Lista Alumnos</div>
+                [*listaAlumnos*]
+                <table>
+                    <thead>
+                        <tr>
+                            [*listaAlumnos_num*]
+                            <th class="th_row">
+                                #
+                            </th>
+                            [*listaAlumnos_alumno*]
+                            <th class="th_row">
+                                alumno
+                            </th>
+                            [*listaAlumnos_fechaAlta*]
+                            <th class="th_row">
+                                Fecha Alta
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+                [/*listaAlumnos*]
+
+
+            </div>
+            <!--field_set Services / products END-->
+        </div>

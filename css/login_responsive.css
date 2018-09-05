@@ -1,0 +1,82 @@
+/**
+*  *********************************
+*  ** Login Responsive Stylesheet **
+*  **          Marco Rubio        **
+*  **          Version 1.0        **
+*  *********************************
+*
+*  CONTENTS
+*
+*  Media Queries...............Media queries for different viewports.
+*  
+*/
+
+@media (min-width: 320px) {
+  .image-container {
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  
+  .left-container {
+    border: none;
+  }
+  
+  .form-container {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}
+
+@media (min-width: 480px) {
+  .image-container {
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  
+  .left-container {
+    border: none;
+  }
+  
+  .form-container {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+@media (min-width: 768px) {
+  .image-container {
+    padding-top: 5%;
+    padding-bottom: 5%;
+  }
+  
+  .left-container {
+    border: none;
+  }
+  
+  .form-container {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
+
+@media (min-width: 992px) {
+  .left-container {
+    border-right: 1px white solid;
+  }
+  
+  .image-container {
+    padding-top: 20%;
+    padding-bottom: 25%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .left-container {
+    border-right: 1px white solid;
+  }
+  
+  .image-container {
+    padding-top: 20%;
+    padding-bottom: 25%;
+  }
+}

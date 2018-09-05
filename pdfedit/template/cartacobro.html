@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../css/cartacobro.css" type="text/css">
+  <link rel="stylesheet" href="css/cartacobro.css" type="text/css">
+</head>
+
+<body>
+
+<div class="canvas">
+
+  <!--Page header-->
+  <div class="header_main">
+    <table>
+      <tr>
+        <td class="header_logo">
+          <img src="logo.png">
+        </td>
+
+        <td>
+            <!--field_set Client data-->
+            <div class="field_set_client">
+
+              <div class="field_set_title">CARTA DE COBRO</div>
+
+              <table>
+
+                <tr>
+                  <th class="th_list">
+                      FECHA:
+                  </th>
+                  <td class="td_list">[*fecha*]</td>
+                </tr>
+
+                <tr>
+                  <th class="th_list">
+                      CLIENTE:
+                  </th>
+                  <td class="td_list">[*cliente*]</td>
+                </tr>
+
+                <tr>
+                  <th class="th_list">
+                    SEDE:
+                  </th>
+                  <td class="td_list">[*sede*]</td>
+                </tr>
+
+                <tr>
+                  <th class="th_list">
+                      FOLIO:
+                  </th>
+                  <td class="td_list">[*folio*]</td>
+                </tr>
+
+
+
+
+
+              </table>
+
+            </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!--Page header END-->
+
+  <div class="services_main">
+   <!--field_set Services / products-->
+   <div class="field_set">
+
+     <div class="field_set_title">CONCEPTOS</div>
+     [*conceptos*]
+     <table>
+       <thead>
+         <tr>
+           [*conceptos_cantidad*]
+           <th class="th_row">
+               CANT.
+           </th>
+           [*conceptos_concepto*]
+           <th class="th_row">
+               CONCEPTO
+           </th>
+           [*conceptos_precio*]
+           <th class="th_row">
+               PRECIO
+           </th>
+           [*conceptos_subtotal*]
+           <th class="th_row">
+               subtotal
+           </th>
+           [*conceptos_descuento*]
+           <th class ="th_row">
+               DESCUENTO
+           </th>
+           [*conceptos_total*]
+           <th class="th_row">
+               TOTAL
+           </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td_row">2</td>
+          <td class="td_row">Clases de tap</td>
+          <td class="td_row">$120.00</td>
+          <td class="td_row">$240.00</td>
+          <td class="td_row">10%</td>
+          <td class="td_row">$216.00</td>
+        </tr>
+      </tbody>
+      <tfoot>
+      </tfoot>
+  </table>
+  [/*conceptos*]
+
+
+  </div>
+  <!--field_set Services / products END-->
+  </div>
+
+  <div class="payment_main">
+
+        <!--field_set Total payment data-->
+        <div class="field_set">
+
+          <div class="field_set_title">TOTAL</div>
+
+          <table>
+
+            <tr>
+              <th class="th_list">
+                SUBTOTAL:
+              </th>
+              <td class="td_list">[*subtotal*]</td>
+            </tr>
+            <tr>
+              <th class="th_list">
+                DESCUENTO:
+              </th>
+              <td class="td_list">[*descuento*]</td>
+            </tr>
+            <tr>
+              <th class="th_list">
+                  TOTAL A PAGAR:
+              </th>
+              <td class="td_list">[*totalPagar*]</td>
+            </tr>
+          </table>
+
+        </div>
+    </div>

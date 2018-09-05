@@ -1,0 +1,161 @@
+/**
+*  ** Login Stylesheet **
+*  **    Marco Rubio   **
+*  **    Version 1.0   **
+*
+*  CONTENTS
+*
+*  SETTINGS
+*  Base Settings...............Base settings and config.
+*  
+*  Input.......................Styles for input fields.
+*
+*  Button and Links............Styles for buttons.
+*
+*  Container...................Container Styles.
+*
+*  Helper......................Helper classes.
+*
+*/
+
+/*-----------------------------*\
+  #BASE
+\*-----------------------------*/
+
+html, body {
+  font-family: 'Raleway Webfont' !important;
+  height: 100%;
+  width: 100%;
+  background: rgb(0, 66, 69); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(45deg, rgb(0, 66, 69), rgb(25,36,38)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(45deg, rgb(0, 66, 69), rgb(25,36,38)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(45deg, rgb(0, 66, 69), rgb(25,36,38)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(45deg, rgb(0, 66, 69), rgb(25,36,38)); /* Standard syntax */
+  background-repeat: no-repeat;
+}
+
+input[type=email], input[type=password] {
+  font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+  color: #cdcdcd;
+  font-size: 15px;
+}
+
+.lead {
+  color: #fff;
+  text-align: center;
+}
+
+/*-----------------------------*\
+  #INPUT
+\*-----------------------------*/
+
+::-webkit-input-placeholder {
+  color: #717171 !important;
+  line-height: 30px !important;
+  border-bottom: 1px white solid !important;
+}
+
+:-moz-placeholder {
+  color: #717171 !important;
+  line-height: 30px !important;
+  border-bottom: 0.5px white solid !important;
+}
+
+::-moz-placeholder {
+  color: #717171 !important;
+  line-height: 30px !important;
+  border-bottom: 1px white solid !important;
+}
+
+:-ms-input-placeholder {
+  color: #717171 !important;
+  line-height: 30px !important;
+  border-bottom: 1px white solid !important;
+}
+
+/*-----------------------------*\
+  #BUTTON AND LINKS
+\*-----------------------------*/
+
+a:hover {
+  text-decoration: none !important;
+  color: #cfcfcf !important;
+}
+
+a:visited {
+  color: #858585;
+}
+
+.form-group > button {
+  width: 100%;
+  font-size: 12px;
+  font-weight: bold;
+  color: #464646;
+  height: 45px;
+}
+
+.link {
+  color: white;
+}
+
+/*-----------------------------*\
+  #CONTAINER
+\*-----------------------------*/
+
+.main-container {
+  padding: 10% 1%;
+  position: relative;
+}
+
+.left-container {
+  border-right: 1px white solid;
+  height: 100%;
+}
+
+.login-img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-container {
+  padding-top: 20%;
+  padding-bottom: 25%;
+}
+
+.form-container {
+  max-width: 100%;
+  height: 100%;
+  padding-top: 10%;
+  padding-bottom: 25%;
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.form-group {
+  margin-bottom: 25px !important;
+}
+
+.form-control {
+  background-color: rgb(33, 55, 58) !important;
+  border: none !important;
+  border-radius: 7px !important;
+  height: 45px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+}
+
+/*-----------------------------*\
+  #HELPER
+\*-----------------------------*/
+
+.fix {
+  height: 100%;
+}
+
+.top-margin-lg {
+  margin-top: 60px;
+}
+
+.top-margin-md {
+  margin-top: 40px;
+}

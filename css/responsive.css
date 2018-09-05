@@ -1,0 +1,418 @@
+/**
+*  *****************************************************************************
+*  ************************  Main Responsive Stylesheet  ***********************
+*  ************************          Marco Rubio         ***********************
+*  ************************          Version 1.0         ***********************
+*  *****************************************************************************
+*
+*  CONTENTS
+*
+*  Media Queries...............Media queries for different viewports.
+*
+*/
+
+/*-----------------------------*\
+  #MIN-WIDTH 320 px
+\*-----------------------------*/
+
+@media (min-width: 320px) {
+  .navbar {
+    min-height: 60px;
+    height: 60px;
+    margin-bottom: -4px;
+  }
+
+  .navbar-collapse {
+    overflow-y: hidden !important;
+  }
+
+  .menu-item {
+    width: 100%;
+    height: 48px;
+  }
+
+  .menu-item:hover {
+    width: 100%;
+    height: 48px;
+  }
+
+  .nav>li>a {
+    padding-top: 5px;
+    padding-bottom: 3px;
+
+  }
+
+  .menu-text-item {
+    letter-spacing: 3px;
+    font-size: 8px;
+  }
+
+  .nav>li>a>i {
+    font-size:2em;
+  }
+
+  .panel-default>.panel-heading {
+    height: 45px;
+    padding: 5px;
+  }
+
+  .panel-default {
+    margin-top: -4px !important;
+  }
+
+  .panel-group {
+    margin-bottom: 0px;
+  }
+
+  .icon-heading {
+    position: relative;
+    display: inline-block;
+  }
+
+  .icon-heading>i {
+    font-size: 1em;
+  }
+
+  .text-heading {
+    letter-spacing: 2px;
+    font-size: 10px;
+    padding: 0px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .panel-body {
+    padding: 0px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0px !important;
+    border: none !important;
+    border-top: none !important;
+  }
+
+  .list-group {
+    margin-bottom: 0px;
+    margin-top: 1px;
+  }
+
+  .panel-collapse {
+    background-color: rgb(255, 255, 255);
+  }
+
+  .list-group-item {
+    border: none;
+    background-color: #8c457b;
+    border-radius: 0px !important;
+    text-align: center !important;
+    padding: 5px;
+  }
+
+  .list-group-item:hover {
+    background-color: #AA6D9F !important;
+  }
+
+  .iconaction, .textaction {
+    display: inline-block;
+    color: rgb(255, 255, 255);
+  }
+
+  .textaction {
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+
+  .actionbar-container {
+    position: relative;
+    margin-top: 62px;
+  }
+
+  .pagecontent-container {
+    /*padding-top: 20px;*/
+    margin-top: 110px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 30px;
+  }
+
+  .filter-container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .searcher-container {
+    width: 270px;
+  }
+
+  #citySum, #countrySum, #stateSum {
+    width: 100%;
+  }
+
+  .special-table-container {
+    padding: 0px;
+  }
+
+  .table-container {
+    padding: 0px;
+  }
+
+  .table-column-title {
+    font-size:10px;
+  }
+
+  table > tbody > tr > td{
+    font-size: 8px;
+  }
+
+  .cell-header {
+    font-size: 8px;
+  }
+
+  .specialTable>.row-table>.horario{
+    font-size: 14px;
+  }
+
+  #duracion {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .btn {
+    font-size:10px;
+  }
+
+  .btn:hover {
+    font-size:10px;
+  }
+
+  .input-disabled-container {
+    width: 100%;
+  }
+
+  .label-right {
+    font-size: 12px;
+  }
+
+  .logo {
+    width: 25%;
+    float: left;
+    top: 5px;
+    position: absolute;
+    display: inline-block;
+  }
+}
+
+/*-----------------------------*\
+  #MIN-WIDTH 480 px
+\*-----------------------------*/
+
+@media (min-width: 480px) {
+  .menu-text-item {
+    letter-spacing: 4px;
+  }
+
+  .cell-header {
+    font-size: 10px;
+  }
+}
+
+/*-----------------------------*\
+  #MIN-WIDTH 768 px
+\*-----------------------------*/
+
+@media (min-width: 768px) {
+  .navbar-header {
+    width: 16.66666667%;;
+  }
+
+  .navbar {
+    height: 81px;
+    min-height: 81px;
+  }
+
+  .menu-item {
+    width: 78px;
+    height: 80px;
+    text-align: center;
+  }
+
+  .menu-item:hover {
+    background-color: #AA6D9F;
+    width: 78px;
+    height: 80px;
+  }
+
+  .nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 1px;
+    padding-right: 1px;
+  }
+
+  .menu-text-item {
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-size: 9px;
+  }
+
+  nav>.container {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .actionbar-container {
+    display: block;
+  }
+
+  .panel-default>.panel-heading{
+    padding: 0px 2px;
+    height: 60px;
+  }
+
+  .panel-default {
+    margin-top: 1px !important;
+  }
+
+  .panel-title {
+    padding: 2px;
+  }
+
+  .text-heading {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .textaction {
+    font-size: 9px;
+  }
+
+  .icon-heading>i {
+    font-size: 1em;
+  }
+
+  .table-column-title {
+    font-size:13px;
+  }
+
+  table > tbody > tr > td{
+    font-size: 12px;
+  }
+
+  .cell-header {
+    font-size:13px;
+  }
+
+  .btn {
+    font-size:12px;
+  }
+
+  .btn:hover {
+    font-size:12px;
+  }
+
+  .input-disabled-container {
+    width: 70%;
+  }
+
+  .tiempo {
+    font-size: 30px;
+  }
+
+  .logo {
+    width: 15%;
+  }
+
+  .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-left: -60px;
+  }
+}
+
+/*-----------------------------*\
+  #MIN-WIDTH 992 px
+\*-----------------------------*/
+
+@media (min-width: 992px) {
+  .menu-item {
+    width: 100px;
+    height: 80px;
+  }
+
+  .menu-item:hover {
+    width: 100px;
+    height: 80px;
+  }
+
+  .nav>li>a {
+    color: rgb(255, 255, 255) !important;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .menu-text-item {
+    position: relative;
+    display: block;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 10px;
+  }
+
+  .text-heading {
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding-top: 6px;
+  }
+
+  .icon-heading>i {
+    font-size: 2em;
+  }
+
+  .list-group-item {
+    height: 40px;
+  }
+
+  .input-disabled-container {
+    width: 50%;
+  }
+}
+
+/*-----------------------------*\
+  #MIN-WIDTH 1200 px
+\*-----------------------------*/
+
+@media (min-width: 1200px) {
+  .menu-item {
+    width: 120px;
+  }
+
+  .menu-item:hover {
+    width: 120px;
+  }
+
+  .menu-text-item {
+    letter-spacing: 1px;
+    font-weight: normal;
+    font-size: 12px;
+  }
+
+  .nav>li>a>i {
+    font-size: 2em;
+  }
+
+  .textaction {
+    font-size: 10px;
+  }
+
+  .text-heading {
+    letter-spacing: 2px;
+  }
+
+  .logo {
+    width: 10%;
+  }
+}

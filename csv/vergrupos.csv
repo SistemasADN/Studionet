@@ -1,0 +1,10 @@
+Grupos
+GRUPO,ASIGNATURA,NIVEL,"NUMERO MAXIMO ALUMNOS","PRECIO HORA",ESTATUS
+"Baile Primero",Baile,Primero,50,$100.00,"Activo desde 17/09/2017"
+"Gimnasia Primero",Gimnasia,Primero,50,$0.00,"Activo desde 17/09/2017"
+Asdf,Baile,Primero,123,$100.00,"Activo desde 02/10/2017"
+Asd1,Gimnasia,Primero,123,$100.00,"Activo desde 02/10/2017"
+Asd2,Gimnasia,Tercero,23,$0.00,"Activo desde 02/10/2017"
+Jazzitos,Jazz,"1 Y 2",20,$100.00,"Activo desde 02/10/2017"
+"El Grupo De Mari",Jazz,"1 Y 2",10,$500.00,"Activo desde 04/10/2017"
+Adsfa,Jazz,Cuarto,50,$100.00,"Activo desde 20/10/2017"

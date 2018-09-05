@@ -1,0 +1,13 @@
+{
+    "name": "koolreport/barcode",
+    "version":"1.0.1",
+    "description": "Display barcode and qrcode",
+    "keywords": ["PHP","php reprting tools","php reporting framework","mysql reporting tools","barcode generator", "qrcode generator"],
+    "homepage": "https://www.koolreport.com",
+    "type": "library",
+    "license": "https://www.koolphp.net/license-agreement",
+    "require": {
+      "picqer/php-barcode-generator": ">=0.2.1",
+      "endroid/qrcode": ">=2.2.0"
+    }
+}
