@@ -147,6 +147,7 @@
                   $('.stateSum').attr('value',data.estado);
                   $('.citySum').attr('value',data.ciudad);
                   $('.countrySum').attr('value',data.pais);
+                  console.log( "La solicitud a finalizado con exito: ");
             },
             error:function( jqXHR, textStatus, errorThrown ) {
                 if ( console && console.log ) {
