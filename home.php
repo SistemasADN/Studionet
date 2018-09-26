@@ -88,7 +88,7 @@ if($_SESSION['idTipoUsuario'] == 2)
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 home-container">
 <?php if($_SESSION['tipoUsuario']!='Profesor'): ?>
 
-  <h2>Administración General11111111</h2>
+  <h2>Administración General 044195273</h2>
   <div class="mainlogo-container" style = "height: 67px;">
 
   </div>
