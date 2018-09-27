@@ -13,14 +13,14 @@
   <link rel="stylesheet" href="css/login_responsive.css">
   <script src="js/jquery-3.1.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <title>Academias Net</title>
+  <title>StudioNet</title>
 </head>
 
 <body>
   <div class="container-fluid fix">
     <div class="row main-container">
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 left-container">
-        <div class="image-container"> <img src="images/LogoStudioNet.png" class="img-responsive login-img" alt="Logo"> </div>
+        <div class="image-container"> <img src="images/LogoStudioNet.jpg" class="img-responsive login-img" alt="Logo"> </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="col-xs-12 col-sm-12 col-md-12">

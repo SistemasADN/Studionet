@@ -81,7 +81,7 @@
         <div class="col-xs-12 col-sm-12 col-md-6 input-container">
           <input type="text" class="form-control form-input" data-minlength="1" data-maxlength="10" data-label="Número interior" data-subtype="alphnum" id="numInt" placeholder="No. Interior" name='NoInterior'> </div>
         <div class="col-xs-12 col-sm-4 col-md-4 input-container">
-          <input type="number" class="form-control form-input cpostal" data-minlength="4" data-maxlength="5" data-label="Codigo Postal" data-subtype="alphnum" id="postalcodeSum" placeholder="C.P." name='CP'> </div>
+          <input type="number" class="form-control form-input" data-minlength="4" data-maxlength="5" data-label="Codigo Postal" data-subtype="alphnum" id="postalcodeSum" placeholder="C.P." name='CP'> </div>
         <div class="col-xs-12 col-sm-8 col-md-8 input-container">
           <select class="selectpicker form-input" data-live-search="true" id="areaSum" data-label="Colonia">
             <option>Colonia</option>
@@ -132,30 +132,29 @@
         Utilizer.loadSelect('modalidadPagoSearch', 'modalidadPagoSelect', 'Modalidad de Pago');
         Utilizer.loadSelect('formaPagoSearch', 'formaPagoSelect', 'Forma de Pago');
         FormEngine.setFormEngine('agregarPersonal');
-     //   $('#postalcodeSum').bind('change', Utilizer.loadDireccion);
+        $('#postalcodeSum').bind('change', Utilizer.loadDireccion);
 
-      $('.cpostal').on('change',function () {
-           var cp = $('.cpostal').val();
-           $.ajax({
-                  async: true,
-                  data:{cp:cp},
-                  type:"POST",
-                  dataType:"json",
-                  url: "queries/getDireccion.php",
-            success:function(data, textStatus, jqXHR) {
-                  //Utilizer.manualLoadSelect('area' + cp, 'Colonia', data.colonia);
-                  $('.stateSum').attr('value',data.estado);
-                  $('.citySum').attr('value',data.ciudad);
-                  $('.countrySum').attr('value',data.pais);
-                  console.log( "La solicitud a finalizado con exito: ");
-            },
-            error:function( jqXHR, textStatus, errorThrown ) {
-                if ( console && console.log ) {
-                    console.log( "La solicitud a fallado: " +  textStatus);
-                }
-            }
-        });
-      });
+      // $('.cpostal').on('change',function () {
+      //      var cp = $('.cpostal').val();
+      //      $.ajax({
+      //             async: true,
+      //             data:{cp:cp},
+      //             type:"POST",
+      //             dataType:"json",
+      //             url: "queries/getDireccion.php",
+      //       success:function(data, textStatus, jqXHR) {
+      //             //Utilizer.manualLoadSelect('area' + cp, 'Colonia', data.colonia);
+      //             $('.stateSum').attr('value',data.estado);
+      //             $('.citySum').attr('value',data.ciudad);
+      //             $('.countrySum').attr('value',data.pais);
+      //       },
+      //       error:function( jqXHR, textStatus, errorThrown ) {
+      //           if ( console && console.log ) {
+      //               console.log( "La solicitud a fallado: " +  textStatus);
+      //           }
+      //       }
+      //   });
+      // });
 
       function afterEdit(data, extra) {
         console.log(data);

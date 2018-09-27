@@ -1,0 +1,191 @@
+@page {
+  margin: 0px;
+}
+
+body {
+  margin: 0px;
+}
+
+.canvas{
+  /*border: 1px solid #000000;*/
+  padding: 20px;
+}
+
+/*header divs----------------------------------------------------------------*/
+.header_main{
+    border-bottom: 1px solid #fff;
+    width:100%;
+    /*margin:auto;*/
+}
+
+.header_logo{
+  width: 50%;
+  float: left;
+}
+th{
+  text-transform: uppercase;
+}
+.data_client{
+  width: 50%;
+  float: right;
+}
+
+.field_set_client{
+  height: auto;
+  width: auto;
+  margin-top: 20px;
+  border: solid;
+  border-width: 2px;
+
+  border-color: #fff;
+  border-radius: 10px;
+}
+/*header END*/
+
+
+
+/*services list--------------------------------------------------------------*/
+.services_main{
+
+}
+/**/
+.black{
+  background-color:black;
+}
+
+.white{
+  background-color:white;
+}
+.thick{
+  height:3px;
+}
+.thin{
+  height:1px;
+}
+.line{
+  width:100%;
+}
+.third-line{
+  width:33%;
+  float:left;
+}
+
+.half-line{
+  width:50%;
+  float:left;
+}
+/*payment data---------------------------------------------------------------*/
+.payment_main{
+
+}
+/*payment data END*/
+
+/*field set for IMPORTANT! note----------------------------------------------*/
+.field_set_note{
+  height: auto;
+
+  width: 100%;
+
+  margin-top: 20px;
+  border: solid;
+  border-width: 2px;
+
+  border-color: #fff;
+  border-radius: 10px;
+}
+
+
+.th_note{
+  font-size: 12px;
+  text-align: center;
+}
+/*field set for IMPORTANT! note END*/
+
+/*field set for Small List*/
+
+
+.field_set_title_small{
+  text-align: center;
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+
+  border-radius: 8px 8px 0px 0px;
+  background: #fff;
+}
+
+
+/*field set for Small List END*/
+
+.field_set{
+  height: auto;
+  margin-top: 20px;
+  border: solid;
+  border-width: 2px;
+
+
+  border-color: #fff;
+
+  border-radius: 10px;
+}
+
+.field_set_title{
+  text-align: left;
+  font-size: 30px;
+  color: black;
+  font-weight: bold;
+
+  border-radius: 8px 8px 0px 0px;
+  background-color: #fff;
+
+}
+
+table{
+  width: 100%;
+}
+
+.th_list {
+    float: left;
+    background: #fff;
+    /*font-weight: bold;*/
+    font-size: 15px;
+    color: black;
+    text-align: right;
+  }
+
+.tr_list {
+    display:block;
+    overflow: auto;
+    margin-bottom: 2px;
+}
+.tr_list > .tr_list {
+    margin-bottom: 0px;
+}
+
+    .td_list {
+    float: right;
+    width: calc(20% - 5px);
+    font-size: 16px;
+    background: #fff;
+    text-align: right;
+    word-break: break-word;
+    text-align: left;
+    padding-left: 5px;
+  }
+
+.th_row{
+  background:#fff;
+  text-align: center;
+  font-weight: bold;
+  color: black;
+}
+
+.td_row{
+  font-size: 16px;
+  text-align: center;
+  border-bottom: 5px solid #rgb(187, 35, 91);
+}
+
+.half{
+  width:33%;
+}

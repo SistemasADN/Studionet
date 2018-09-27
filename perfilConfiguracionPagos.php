@@ -16,15 +16,35 @@
   </div>
   <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
   <button type="button" class="btn btn-primary hidden" id="cgeneral">CONFIGURACIÓN GENERAL</button>
-  <button type="button" onClick = 'location.href = "#";' class="btn btn-primary" id="cdisciplina">CONFIGURACIÓN POR DISCIPLINA</button>
-  <button type="button" onClick = 'location.href = "#";' class="btn btn-primary" id="cequipos">CONFIGURACIÓN POR EQUIPOS</button>
-  <span><input type="checkbox" id="cClases" <?php if($cobranzaDefault['idForma']==2){echo "checked";} ?>> <label>COBRO POR GRUPOS</label></span>
+      <?php if($cobranzaDefault['idForma']==0)
+      {
+          $cobra = "POR DISCIPLINA Y EQUIPOS/PAQUETES";
+          ?>
+          <button type="button" onClick = 'location.href = "#";' class="btn btn-info" id="cdisciplina">CONFIGURACIÓN POR DISCIPLINA</button>
+          <button type="button" onClick = 'location.href = "#";' class="btn btn-info" id="cequipos">CONFIGURACIÓN POR EQUIPOS/PAQUETES</button>
+          <button type="button" onClick = 'location.href = "#";' class="btn btn-primary" id="cobro">COBRO POR GRUPOS</button>
+      <?php
+      }
+      else if($cobranzaDefault['idForma']==2)
+      {
+          $cobra = "POR GRUPOS Y EQUIPOS/PAQUETES";
+          ?>
+          <button type="button" onClick = 'location.href = "#";' class="btn btn-primary" id="cdisciplina">CONFIGURACIÓN POR DISCIPLINA</button>
+          <button type="button" onClick = 'location.href = "#";' class="btn btn-info" id="cequipos">CONFIGURACIÓN POR EQUIPOS/PAQUETES</button>
+          <button type="button" onClick = 'location.href = "#";' class="btn btn-info" id="cobro">COBRO POR GRUPOS</button>
+          <?php
+      }
+      ?>
+
+
+<!--  <span><input type="checkbox" id="cClases" <?php /*if($cobranzaDefault['idForma']==2){echo "checked";} */?>> <label>COBRO POR GRUPOS</label></span>
+-->
   </div>
   <div class="" id="general">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content-container">
       <div class="col-xs-12 col-sm-12 col-md-8 form-container">
         <div class="row" id="resumenCP">
-          <?php if($cobranzaDefault['idForma']==0){$cobra = "POR DISCIPLINA Y EQUIPOS";} else if($cobranzaDefault['idForma']==2){$cobra = "POR GRUPOS Y EQUIPOS";}?>
+
           <div class="alert alert-info" role="alert">
            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
              <span aria-hidden="true">&times;</span>
@@ -101,9 +121,9 @@
           </div>
           <!-- CUOTA MENSUAL POR CLASE-->
           <div class="col-xs-12 col-sm-12 col-md-12 configurar custom-legend lower" hidden id = "configurar2">
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <button type="button" onClick = 'location.href = "catalogoGruposVer.php";' class="btn btn-save">CATÁLOGOS GRUPOS</button>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-container">
@@ -280,9 +300,10 @@
             Utilizer.loadSelect('idCalculoPagos', 'formaCalculoSelect', 'Forma Cálculo', {}, setEquipos);
             Utilizer.loadSelect('idEquipos', 'equipoSelect', 'Equipos');    
       });
-      $('#cClases').click(function(){
+      $('#cobro').click(function()
+      {
         Utilizer.loadSelect('idCalculoPagos', 'formaCalculoClases', 'Forma Cálculo', {}, setPorGrupos);
-        if($(this).prop('checked')){
+        /*if($(this).prop('checked')){*/
               $('#tipoSelect').val('1');
               $('#titulo').html('COBRANZA POR GRUPOS');
               $('#div_equipo').addClass('hidden');
@@ -291,14 +312,14 @@
               $('#tipoCobranza').addClass('hidden');
               $('#configurar2').removeClass('hidden');
               $('#vprincipal').removeClass('hidden');
-              } else {
+              /*} else {
                   $('#titulo').html('&nbsp;');
                   $('#div_equipo').addClass('hidden');
                   $('#div_disciplina').addClass('hidden');
                   $('#tipoCobranza').addClass('hidden');
                   $('#configurar2').addClass('hidden');
-                  Utilizer.loadSelect('idCalculoPagos', 'formaCalculoClases', 'Forma Cálculo', {}, setSelected); 
-              }
+                  Utilizer.loadSelect('idCalculoPagos', 'formaCalculoClases', 'Forma Cálculo', {}, setSelected);
+              }*/
       });
             var idCalculoPagosActual = 0;
             function setSelected() {
@@ -434,7 +455,7 @@
             {
                 $("#configurar"+i).append('<div class="col-xs-12 col-sm-12 col-md-12 input-container"><button type="button" class="btn btn-save" data-form="config'+i+'-input" data-function="afterEdit" data-script="cambiarConfiguracionPagos" data-clear="false" id="cambiarConfiguracion'+i+'">Guardar</button></div>');
                 $("#idCalculoPagos").addClass('config'+i+'-input');
-              
+
               FormEngine.setFormEngine("cambiarConfiguracion"+i);
             }
 
@@ -568,11 +589,13 @@
       });
       function afterEdit(){
        var config_calculo = $('#tipoSelect').val();
-       if(config_calculo == 2){ //carga disciplinas configuradas
+       if(config_calculo == 2)
+       { //carga disciplinas configuradas
         cargaDisciplinas();
        } else if(config_calculo == 3){ //carga equipos configurados
         cargaEquipos();
        }
+
       }
       function cargaEquipos(){
         $.ajax
@@ -580,7 +603,8 @@
             url: "ajax/cargaEquipos.php",
             type: "POST",
             data: {accion: "equipos"},
-            success: function (result) {
+            success: function (result)
+            {
                 $("#configuracionActual").html(result);
             }
         });

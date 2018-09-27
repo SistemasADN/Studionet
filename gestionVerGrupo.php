@@ -12,12 +12,12 @@
   <?php include_once "queries/getFormaCalculo.php"; ?>
 
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-container" id="grupoContainer">
-    <table class="table table-hover table-responsive" id="gruposVer" data-pdf = true data-csv = true data-copy = true data-xls = true data-titulo = "Gestión de grupos" >
+    <table class="table table-hover table-responsive" id="gruposVer" data-csv = true data-copy = true data-xls = true data-titulo = "Gestión de grupos" >
       <thead>
         <tr class="table-header">
           <th class="table-column-title">GRUPO</th>
           <th class="table-column-title">PROFESOR PRINCIPAL</th>
-          <th class="table-column-title">Clase - Nivel</th>
+          <th class="table-column-title">CLASE-NIVEL</th>
           <th class="table-column-title">DISCIPLINA</th>
           <th class="table-column-title">HORARIO</th>
           <th class="table-column-title ">NÚMERO MÁXIMO DE ALUMNOS</th>
@@ -29,7 +29,7 @@
         <tr class="table-header">
           <th class="table-column-title">GRUPO</th>
           <th class="table-column-title">PROFESOR PRINCIPAL</th>
-          <th class="table-column-title">Clase - Nivel</th>
+          <th class="table-column-title">CLASE-NIVEL</th>
           <th class="table-column-title">DISCIPLINA</th>
           <th class="table-column-title">HORARIO</th>
           <th class="table-column-title ">NÚMERO MÁXIMO DE ALUMNOS</th>

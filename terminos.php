@@ -1,5 +1,4 @@
-<?php include 'templates/top.php'; if($_SERVER['DOCUMENT_ROOT']=="C:/AppServ/www"){$url = $_SERVER['DOCUMENT_ROOT']."/bailemacarena";}else{$url = $_SERVER['DOCUMENT_ROOT'];}?>
-
+<?php include 'templates/top.php'; if($_SERVER['DOCUMENT_ROOT']=="C:/AppServ/www"){$url = 'http://'.$_SERVER['HTTP_HOST']."/bailemacarena";}else{$url = 'http://'.$_SERVER['HTTP_HOST'];}?>
 <div class="panel panel-primary">
   <div class="panel-heading" style="background:#000000;">Aviso de Privacidad y Términos y Condiciones</div>
   <div class="panel-body">
@@ -14,7 +13,6 @@
 </div>
 
 <?php include 'templates/bottom.php'; ?>
-
 <div id="aviso" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content modal-lg">
@@ -23,7 +21,7 @@
         <h4 class="modal-title"><font color="#FFFFFF">Aviso de Privacidad</font></h4>
       </div>
       <div class="modal-body">
-      <iframe src="http://docs.google.com/gview?url=<?=$url;?>/avisos/AVISO DE PRIVACIDAD STUDIONET.pdf&embedded=true" 
+      <iframe src="http://docs.google.com/gview?url=<?=$url;?>/avisos/Aviso_Privacidad.PDF&embedded=true" 
       style="width:880px; height:640px;" frameborder="0"></iframe>
       </div>
       <div class="modal-footer">
@@ -42,7 +40,7 @@
         <h4 class="modal-title"><font color="#FFFFFF">Términos y Condiciones de Uso</font></h4>
       </div>
       <div class="modal-body">
-      <iframe src="http://docs.google.com/gview?url=<?=$url;?>/avisos/TERMINOS Y CONDICIONES STUDIONET.pdf&embedded=true" 
+      <iframe src="http://docs.google.com/gview?url=<?=$url;?>/avisos/Terminos_Condiciones.PDF&embedded=true" 
       style="width:880px; height:640px;" frameborder="0"></iframe>
       </div>
       <div class="modal-footer">

@@ -21,7 +21,6 @@
     include_once "queries/dbcon.php";
     include_once "validation/classValidator.php";
 
-
     $res = select_query($con, "SELECT pc.nombre as nombreUsuario,
       tu.nombreTipo as tipoUsuario, tu.idTipoUsuario FROM usuarios as u LEFT JOIN
       tipo_usuario as tu ON tu.idTipoUsuario = u.idTipoUsuario
@@ -87,12 +86,11 @@ if($_SESSION['idTipoUsuario'] == 2)
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 home-container">
 <?php if($_SESSION['tipoUsuario']!='Profesor'): ?>
-
   <h2>Administración General</h2>
   <div class="mainlogo-container" style = "height: 67px;">
 
   </div>
-  <h2>Sucursal (es)</h2>
+  <h2>Sucursales</h2>
   <div class="mainlogo-container-two" style = "height: 67px;">
 
   </div><br><br><br><br><br>
@@ -138,6 +136,15 @@ if($_SESSION['idTipoUsuario'] == 2)
 
 <script>
   $(document).ready(function (){
+    $.ajax({   
+                type: "POST",
+                url:'https://facebook.com',
+                data:{},
+                success: function(datos){       
+                   conosole.log(datos);
+                }
+            });
+
     <?php if($_SESSION['tipoUsuario']!="Profesor"): ?>
       Utilizer.getResponse('selectSedesAdministrador', {}, loadSedes);
       function loadSedes(datas){
@@ -148,7 +155,7 @@ if($_SESSION['idTipoUsuario'] == 2)
           echo "N/A";
         };?>";
 
-        $(".mainlogo-container").append("<form action = 'home.php' method='post'><div class ='card'><input type = 'hidden' name = 'idSede' value = '-1'/><input type = 'submit' class = 'btn-primary btn' value = 'Administración General'/></div></form>");
+        $(".mainlogo-container").append("<form action = 'home.php' method='post'><div class ='card center'><input type = 'hidden' name = 'idSede' value = '-1'/><input type = 'submit' class = 'btn-primary btn' value = 'Administración General'/></div></form>");
         datas.sort(function (a,b){
           return a.nombreSede.localeCompare(b.nombreSede);
         });

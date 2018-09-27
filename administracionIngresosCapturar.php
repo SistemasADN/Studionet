@@ -3,13 +3,12 @@
     <div class="logo-container"> <i class="fa fa-plus"></i> </div>
     <div class="text-container"> CAPTURAR INGRESO</div>
   </div>
-
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content-container">
     <div class="col-xs-12 col-sm-12 col-md-8 form-container">
-      <fieldset>
+         <fieldset>
         <div class="col-xs-12 col-sm-12 col-md-12">
           <div class="jumbotron jumbotron-container">
-            <div class="jumbotron-text"><abbr title = 'Por favor llene la forma para generar el ingreso'>DATOS DEL INGRESO</abbr></div>
+            <div class="jumbotron-text evento"><abbr title = 'Por favor llene la forma para generar el ingreso'>DATOS DEL INGRESO</abbr></div>
           </div>
         </div>
 
@@ -28,7 +27,7 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
-        <button class="btn btn-primary generaNuevaCC" data-toggle = "modal" data-target = "#nuevaCC">Generar Carta de Cobro</button>
+        <button class="btn btn-primary generaNuevaCC" id = "clienteSelecc" data-toggle = "modal" data-target = "#nuevaCC">Generar Carta de Cobro</button>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 input-container form-cliente" hidden>
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-container">
@@ -207,14 +206,21 @@
       </div>
     </div>
   </div>
+  <style>
+    #mdialTamanio{
+      left: 8% !important;
+      width: 70% !important;
+    }
+  </style>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="nuevaCC">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" id = "mdialTamanio" role="document">
       <div class="modal-content contenidoNuevaCC">
        
       </div>
     </div>
 </div>
+
 
   <div class="modal fade" tabindex="-1" role="dialog" id="modalRevisar">
     <div class="modal-dialog modal-lg" role="document">
@@ -455,12 +461,16 @@
 
   <?php include 'templates/bottom.php'; ?>
     <script>
-       $('.generaNuevaCC').click(function () {
-        $.post("ajax/ajaxNuevaCC.php", {accion:'nuevaCartaCobro', cliente:''}).done(function(x){$('.contenidoNuevaCC').html(x);});
+        $('.generaNuevaCC').click(function () {
+        $.post("ajax/ajaxNuevaCC.php", {accion:'nuevaCartaCobro', cliente:$('#idCliente').val(), fecha:$('#fechaSelectText').val()}).done(function(x){
+         $('.contenidoNuevaCC').html(x);
+          afterAprobarRecibo();
+          $('#nuevaCC').modal('hide');
+        });
        });
 
       $(document).ready(function () {
-        //Csser.collapse(3, 1);
+        $('#clienteSelecc').attr('disabled',true);
         function afterLoadCliente (){
         if(<?php
           if(isset($_POST['idCliente'])){
@@ -502,6 +512,13 @@
         Utilizer.loadSelect('idAlumno', 'selectAlumnoIdCliente', 'Alumno');
 
         $("#idCliente,#idAlumno").change(function (){
+          var clienteSeleccionado = $('#idCliente').val(); 
+          var alumnoSeleccionado = $('#idAlumno').val();
+          if(clienteSeleccionado==null && alumnoSeleccionado==null){
+            $('#clienteSelecc').attr('disabled',true);
+          }else{
+            $('#clienteSelecc').attr('disabled',false);
+          }
           if($(this).attr('id')=="idAlumno"){
             Utilizer.setPicker('idCliente', Utilizer.getSelected('idAlumno').data('cliente'));
           }else{
@@ -513,7 +530,9 @@
           tableUtilities.loadScript('recibosVer', 'getRecibosCliente', {idCliente:$("#idCliente").val()}, agregarRecibo);
           tableUtilities.loadScript('cuentasPorPagar', 'clienteReciboPagoCobrar', {idCliente:$("#idCliente").val(), fechaInicial:'2017-01-01', fechaFinal:Utilizer.dateParseToDbDate(new Date()), todos:false}, addReciboPagar);
         });
-
+        function cargaRecibos(){
+          tableUtilities.loadScript('cuentasPorPagar', 'clienteReciboPagoCobrar', {idCliente:$("#idCliente").val(), fechaInicial:'2017-01-01', fechaFinal:Utilizer.dateParseToDbDate(new Date()), todos:false}, addReciboPagar);
+        }
         setBalanceCliente();
         Utilizer.loadSelect('idCuenta', 				'selectCuenta', 			'Cuenta', {}, setCuenta);
       	Utilizer.loadSelect('idCuentaOrigen', 	'selectCuenta', 			'Cuenta Origen');

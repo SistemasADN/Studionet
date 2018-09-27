@@ -58,7 +58,6 @@
   }else{
     $name = $_POST['type'].$_POST['params'][$format['id']];
   }
-
   $pdfTemplate = getPdfTemplate($_POST['type']);
   $pdfData = getPdfData($con, $_POST['type'], $_POST['params']);
   $pdfFusion = fusePdfTemplateData($pdfTemplate, $pdfData);

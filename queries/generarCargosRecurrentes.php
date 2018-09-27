@@ -27,12 +27,13 @@
 		 (g.fechaBaja IS NULL OR YEAR(?)<YEAR(g.fechaBaja) OR MONTH(?)<=MONTH(g.fechaBaja)))",
 		 'issssssss', [$idSede, $fecha, $fecha, $fecha, $fecha, $fecha, $fecha, $fecha, $fecha]);
 
+          
 		 //forma de calculo por clase
 		 foreach($clases as $idClase=>$clase){
           	$formaCalculoDisciplina[$clase['idClase']] = select_query($con, "SELECT idCalculoPagos, veceshorasdias, cuota FROM forma_calculos_detalle WHERE idDisciplina = ? AND idEquipo IS NULL", 'i', [$clase['idDisciplina']]); 
 	
 			$clases[$idClase]['listaAlumnos'] = select_query($con, "SELECT idAlumno, idAlumnoGrupo FROM alumnos_grupos
-				WHERE idGrupo = ? AND ((YEAR(?)>YEAR(fechaAlta) OR YEAR(?)=YEAR(fechaAlta)) AND
+			 WHERE idGrupo = ? AND ((YEAR(?)>YEAR(fechaAlta) OR YEAR(?)=YEAR(fechaAlta)) AND
 	 		 (YEAR(?)>YEAR(fechaAlta) OR MONTH(?)>=MONTH(fechaAlta)) AND
 	 		 (fechaBaja IS NULL OR YEAR(?)<YEAR(fechaBaja) OR YEAR(?)=YEAR(fechaBaja)) AND
 	 		 (fechaBaja IS NULL OR YEAR(?)<YEAR(fechaBaja) OR MONTH(?)<=MONTH(fechaBaja)))",
@@ -44,10 +45,11 @@
 					unset($clases[$k]);
 			}
 		}
-    
+  // print_r($clases); echo "<br><br>"; exit;
    foreach($clases as $class){
 	$alumnosPorClase[$class['idClase']]['alumnosPorClase']=$class['listaAlumnos'];  
    }
+   	//print_r($alumnosPorClase); echo "<br><br>"; exit;
 	$disciplinasActivas = select_query($con, "SELECT idDisciplina, nombreDisciplina as disciplina FROM disciplinas WHERE activo = '1'");
 	foreach($disciplinasActivas as $disciplinas){
 		$formaCalculoDisciplina[$disciplinas['idDisciplina']] = select_query($con, "SELECT idCalculoPagos, veceshorasdias, cuota FROM forma_calculos_detalle WHERE idDisciplina = ? AND idEquipo IS NULL", 'i', [$disciplinas['idDisciplina']]);
@@ -78,7 +80,7 @@
 					if($cobranzaMensual =='2'){
 					$cobrado = select_query_one($con, "SELECT COUNT(rpl.idReciboPagoLista) as cobrado FROM recibo_pago_lista as rpl
 					LEFT JOIN alumnos_grupos as ag ON ag.idAlumnoGrupo = rpl.idAlumnoGrupo
-					 WHERE ag.idGrupo = ? AND ag.idAlumno = ? AND YEAR(rpl.fecha) = YEAR(?) AND MONTH(rpl.fecha) = MONTH(?)", 'iiss', [$clase['idClase'], $alumno['idAlumno'], $fecha, $fecha]);
+					WHERE ag.idGrupo = ? AND ag.idAlumno = ? AND YEAR(rpl.fecha) = YEAR(?) AND MONTH(rpl.fecha) = MONTH(?)", 'iiss', [$clase['idClase'], $alumno['idAlumno'], $fecha, $fecha]);
 					}else{
 					$cobrado = select_query_one($con, "SELECT COUNT(rpl.idReciboPagoLista) as cobrado FROM recibo_pago_lista as rpl
 					LEFT JOIN alumnos_grupos as ag ON ag.idAlumnoGrupo = rpl.idAlumnoGrupo
@@ -108,22 +110,23 @@
 if($listaAlumnos !=NULL){ //si hay alumnos a quienes cobrar
 		$listaConceptosAlumno = array();
 		$listaDisciplinas = array();
-
 		foreach($listaAlumnos as $idAlumno => $infoAlumno){
-			foreach($infoAlumno as $infoo){
-				if($infoo['cuotaEquipo']!='0.00'){
-					$alumnos_equipos[$infoo['idAlumno']]=$infoo['idAlumno'];
-				}
-				else{
+				foreach($infoAlumno as $infoo){
+					if($infoo['cuotaEquipo']!=0.00){
+						$equipoCobradoAlumno = select_query($con,"SELECT detallesCobro FROM recibo_pago_lista where idAlumno =? and MONTH(fecha) like MONTH(?)","is",[$idAlumno,$fecha]);
+						$dataEquipoAlumno = json_decode($equipoCobradoAlumno[0]['detallesCobro'],true);
+						if($dataEquipoAlumno['cuotaEquipo']==0.00){		
+						$alumnos_equipos[$infoo['idAlumno']]=$infoo['idAlumno'];
+					}
+				} else{
 					$alumnos_SinEquipo[$infoo['idAlumno']]=$infoo['idAlumno'];
 				}	
 			}
 		}
-        
 		foreach($clases as $cla){
 				foreach($listaAlumnos as $idAlumno => $conceptosAl){
 					if(@in_array($conceptosAl[$cla['idClase']]['idAlumno'],$alumnos_equipos)){
-				            $listaConceptosAlumno[$conceptosAl[$cla['idClase']]['idAlumno']]= ['fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
+				            $listaConceptosAlumno[$conceptosAl[$cla['idClase']]['idAlumno']]= ['idAlumno'=>$idAlumno,'fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
 							'precioActual'=>$conceptosAl[$cla['idClase']]['cuotaEquipo']?:'0.00', 'detallesCobro'=>json_encode($conceptosAl[$cla['idClase']]), 'infoCobros'=>json_encode($conceptosAl[$cla['idClase']])];
 							if(!in_array($conceptosAl[$cla['idClase']]['idDisciplina'], $listaDisciplinas)){
 								$listaDisciplinas[] = $infoo['idDisciplina'];
@@ -139,7 +142,7 @@ if($listaAlumnos !=NULL){ //si hay alumnos a quienes cobrar
 						case 1:
 						$diaPago = select_query_one($con, "SELECT cuota FROM forma_calculos_detalle  WHERE idCalculoPagos = ? AND idDisciplina = ? and idEquipo IS NULL",'ii',[$conceptosAl[$cla['idClase']]['idCalculoPagos'],$conceptosAl[$cla['idClase']]['idDisciplina']]); 
 						$costo = $diaPago['cuota'];
-						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
+						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['idAlumno'=>$idAlumno,'fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
 							'precioActual'=>$costo?:'0.00', 'detallesCobro'=>json_encode($conceptosAl[$cla['idClase']]), 'infoCobros'=>json_encode($conceptosAl[$cla['idClase']])];
 							if(!in_array($conceptosAl[$cla['idClase']]['idDisciplina'], $listaDisciplinas)){
 								$listaDisciplinas[] = $infoo['idDisciplina'];
@@ -148,7 +151,7 @@ if($listaAlumnos !=NULL){ //si hay alumnos a quienes cobrar
 						case 2:
 						//por clase
 						if($conceptosAl[$cla['idClase']]['idAlumno']!=""){
-						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
+						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['idAlumno'=>$idAlumno,'fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
 							'precioActual'=>$conceptosAl[$cla['idClase']]['precioMensual']?:'0.00', 'detallesCobro'=>json_encode($conceptosAl[$cla['idClase']]), 'infoCobros'=>json_encode($conceptosAl[$cla['idClase']])];
 							if(!in_array($conceptosAl[$cla['idClase']]['idDisciplina'], $listaDisciplinas)){
 								$listaDisciplinas[] = $infoo['idDisciplina'];
@@ -165,7 +168,7 @@ if($listaAlumnos !=NULL){ //si hay alumnos a quienes cobrar
 								}
 							} else{$costo = 0.00;}
 						}				
-						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
+						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['idAlumno'=>$idAlumno,'fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
 							'precioActual'=>$costo?:'0.00', 'detallesCobro'=>json_encode($conceptosAl[$cla['idClase']]), 'infoCobros'=>json_encode($conceptosAl[$cla['idClase']])];
 							if(!in_array($conceptosAl[$cla['idClase']]['idDisciplina'], $listaDisciplinas)){
 								$listaDisciplinas[] = $infoo['idDisciplina'];
@@ -181,7 +184,7 @@ if($listaAlumnos !=NULL){ //si hay alumnos a quienes cobrar
 								}
 							} else{$costo = 0.00;}
 						}				
-						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
+						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['idAlumno'=>$idAlumno,'fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
 							'precioActual'=>$costo?:'0.00', 'detallesCobro'=>json_encode($conceptosAl[$cla['idClase']]), 'infoCobros'=>json_encode($conceptosAl[$cla['idClase']])];
 							if(!in_array($conceptosAl[$cla['idClase']]['idDisciplina'], $listaDisciplinas)){
 								$listaDisciplinas[] = $infoo['idDisciplina'];
@@ -197,7 +200,7 @@ if($listaAlumnos !=NULL){ //si hay alumnos a quienes cobrar
 								}
 							} else{$costo = 0.00;}
 						}				
-						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
+						$listaConceptosAlumnoSinEquipo[$conceptosAl[$cla['idClase']]['idAlumno']]= ['idAlumno'=>$idAlumno,'fecha'=>$fecha, 'idAlumnoGrupo'=>$conceptosAl[$cla['idClase']]['idAlumnoGrupo'],
 							'precioActual'=>$costo?:'0.00', 'detallesCobro'=>json_encode($conceptosAl[$cla['idClase']]), 'infoCobros'=>json_encode($conceptosAl[$cla['idClase']])];
 							if(!in_array($conceptosAl[$cla['idClase']]['idDisciplina'], $listaDisciplinas)){
 								$listaDisciplinas[] = $infoo['idDisciplina'];
@@ -207,7 +210,7 @@ if($listaAlumnos !=NULL){ //si hay alumnos a quienes cobrar
 					}
 				}
 			}
-
+			
 		$listaClientes = array();
 		foreach($listaConceptosAlumno as $idAlumno => $listaConceptos){
 			$idCliente = select_query_one($con, "SELECT idTutor FROM alumnos WHERE idAlumno = ?", 'i', [$idAlumno]);
@@ -230,6 +233,8 @@ if($listaAlumnos !=NULL){ //si hay alumnos a quienes cobrar
 				$listaClientes2[$idCliente][$idAlumno] = $listaConceptosAlumnoSinEquipo[$idAlumno];
 			}
 		}
+		   // echo "alumnos de equipos <br><br>"; print_r($alumnos_equipos); echo "<br><br>"; exit;
+			
 if($alumnos_equipos !=NULL){
 		foreach($listaClientes as $idCliente => $listaConceptos){
 			$idCC = select_query_one($con, "SELECT idReciboPago FROM recibo_pago WHERE idCliente = ? AND folio IS NULL AND idSede = ? ORDER BY idReciboPago DESC LIMIT 1", 'ii', [$idCliente, $idSede]);
@@ -245,14 +250,14 @@ if($alumnos_equipos !=NULL){
 					if(!isset($concepto['detallesCobro'])){
 						$concepto['detallesCobro'] = "";
 					}
-					$query = "INSERT INTO recibo_pago_lista (idReciboPago, idAlumno, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?,?)";
-					$paramText = "iisdss";
-					$paramArray = [$a[$idCliente], $concepto['idAlumno'], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
+					$query = "INSERT INTO recibo_pago_lista (idReciboPago, idAlumno, idAlumnoGrupo, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?,?,?)";
+					$paramText = "iiisdss";
+					$paramArray = [$a[$idCliente], $concepto['idAlumno'], $concepto['idAlumnoGrupo'], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
 				}
 				else if (isset($concepto['idAlumnoGrupo'])){ //echo "HAY ALUMNO GRUPO";
-					$query = "INSERT INTO recibo_pago_lista (idReciboPago, idAlumnoGrupo, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?,?)";
-					$paramText = "iisdss";
-					$paramArray = [$a[$idCliente], $concepto['idAlumnoGrupo'], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
+					$query = "INSERT INTO recibo_pago_lista (idReciboPago, idAlumno, idAlumnoGrupo, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?,?,?)";
+					$paramText = "iiisdss";
+					$paramArray = [$a[$idCliente], $concepto['idAlumno'], $concepto['idAlumnoGrupo'], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
 				}else{//echo "NO HAY ALUMNO, NO HAY GRUPO";
 					$query = "INSERT INTO recibo_pago_lista (idReciboPago, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?)";
 					$paramText = "isdss";
@@ -270,25 +275,30 @@ if($alumnos_equipos !=NULL){
 				$idCC = $idCC['idReciboPago'];
 			}
 			$b[$idCliente2] = $idCC;
-			foreach($listaConceptos as $idAlumno => $concepto){ //Insertar conceptos a CC				
-				if(isset($concepto['idAlumno']))
-				{ //echo "HAY ALUMNO";
-					if(!isset($concepto['detallesCobro'])){
-						$concepto['detallesCobro'] = "";
-					}
-					$query = "INSERT INTO recibo_pago_lista (idReciboPago, idAlumno, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?,?)";
-					$paramText = "iisdss";
-					$paramArray = [$b[$idCliente2], $concepto['idAlumno'], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
-				}else if (isset($concepto['idAlumnoGrupo'])){ //echo "HAY ALUMNO GRUPO";
-					$query = "INSERT INTO recibo_pago_lista (idReciboPago, idAlumnoGrupo, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?,?)";
-					$paramText = "iisdss";
-					$paramArray = [$b[$idCliente2], $concepto['idAlumnoGrupo'], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
-				}else{//echo "NO HAY ALUMNO, NO HAY GRUPO";
-					$query = "INSERT INTO recibo_pago_lista (idReciboPago, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?)";
-					$paramText = "isdss";
-					$paramArray = [$b[$idCliente2], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
-				}
-				execute_query($con, $query, $paramText, $paramArray, false) or die ("e|Generar Cobranza Mensual|Ha habido un error al generar la cobranza mensual.");
+			foreach($listaConceptos as $idAlumno => $concepto){ //Insertar conceptos a CC
+				//echo "alumnos sin equipos <br><br>"; print_r($concepto); 
+				$equipoCobradoAlumno = select_query($con,"SELECT detallesCobro FROM recibo_pago_lista where idAlumno =? and MONTH(fecha) like MONTH(?)","is",[$concepto['idAlumno'],$fecha]);
+						$dataEquipoAlumno = json_decode($equipoCobradoAlumno[0]['detallesCobro'],true);
+						if($dataEquipoAlumno['cuotaEquipo']==0.00){				
+							if(isset($concepto['idAlumno']))
+							{ //echo "HAY ALUMNO";
+								if(!isset($concepto['detallesCobro'])){
+									$concepto['detallesCobro'] = "";
+								}
+								$query = "INSERT INTO recibo_pago_lista (idReciboPago, idAlumno, idAlumnoGrupo, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?,?,?)";
+								$paramText = "iiisdss";
+								$paramArray = [$b[$idCliente2], $concepto['idAlumno'],$concepto['idAlumnoGrupo'], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
+							}else if (isset($concepto['idAlumnoGrupo'])){ //echo "HAY ALUMNO GRUPO";
+								$query = "INSERT INTO recibo_pago_lista (idReciboPago, idAlumno, idAlumnoGrupo, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?,?,?)";
+								$paramText = "iiisdss";
+								$paramArray = [$b[$idCliente2], $concepto['idAlumno'], $concepto['idAlumnoGrupo'], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
+							}else{//echo "NO HAY ALUMNO, NO HAY GRUPO";
+								$query = "INSERT INTO recibo_pago_lista (idReciboPago, fecha, precioActual, detallesCobro, infoCobros) VALUES (?,?,?,?,?)";
+								$paramText = "isdss";
+								$paramArray = [$b[$idCliente2], $concepto['fecha'], $concepto['precioActual'], $concepto['detallesCobro'], $concepto['infoCobros']];
+							}
+							execute_query($con, $query, $paramText, $paramArray, false) or die ("e|Generar Cobranza Mensual|Ha habido un error al generar la cobranza mensual.");
+						}
 			}
 		}
 		$resMes = buscaMes($mes_generado);

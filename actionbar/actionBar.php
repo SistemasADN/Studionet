@@ -88,7 +88,7 @@
     [
       "href"=>'administracionEstadoCuentaSede',
       "icon"=>'list-ol',
-      "text"=>'ESTADO DE CUENTA SEDE',
+      "text"=>'ESTADO DE CUENTA SUCURSAL',
       "list"=>[]
     ],
   ];

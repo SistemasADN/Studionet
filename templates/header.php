@@ -1,3 +1,4 @@
+<?php //print_r($_SESSION); ?> 
   <div class="top-cover"></div>
 
   <div id="header">
@@ -77,7 +78,9 @@
         'icon' => 'sign-out',
         'href' => 'queries/logout',
         'id' => 'salir']];
-
+        if($_SESSION['nombreSede']=="" AND $_SESSION['tipoUsuario']!="Profesor"){
+          echo "<div class = 'row'><li  style = 'color : white;'><h2>&nbsp;&nbsp;&nbsp;&nbsp;Seleccione por favor una sucursal</h2></li></div>";
+        }
         foreach($navBar as $nav){
           //Quitar permisos por Usuario
           if(in_array($nav['id'], $clearUsuario[$_SESSION['idTipoUsuario']])){

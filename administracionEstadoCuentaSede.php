@@ -1,7 +1,7 @@
 <?php include 'templates/top.php'; ?>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 title-container">
     <div class="logo-container"> <i class="fa fa-clipboard"></i> </div>
-    <div class="text-container"> ESTADO DE CUENTA SEDE </div>
+    <div class="text-container"> ESTADO DE CUENTA SUCURSAL </div>
   </div>
 
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 content-container">

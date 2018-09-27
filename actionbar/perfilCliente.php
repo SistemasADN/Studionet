@@ -18,7 +18,7 @@
   });
 </script>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"><?php
-  <!-- Cambiar COntrasena Start -->
+
 
     <button class="panel-heading catalogo" data-parent="#accordion" data-toggle="collapse" href="#collapse11["href"=>'perfilCambiarContrasenaCliente',
 
