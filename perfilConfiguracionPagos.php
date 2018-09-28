@@ -20,6 +20,7 @@
       {
           $cobra = "POR DISCIPLINA Y EQUIPOS/PAQUETES";
           ?>
+          <button type="button" id="cobranza" value="<?= $cobranzaDefault['idForma']; ?>" hidden></button>
           <button type="button" onClick = 'location.href = "#";' class="btn btn-info" id="cdisciplina">CONFIGURACIÓN POR DISCIPLINA</button>
           <button type="button" onClick = 'location.href = "#";' class="btn btn-info" id="cequipos">CONFIGURACIÓN POR EQUIPOS/PAQUETES</button>
           <button type="button" onClick = 'location.href = "#";' class="btn btn-primary" id="cobro">COBRO POR GRUPOS</button>
@@ -29,6 +30,7 @@
       {
           $cobra = "POR GRUPOS Y EQUIPOS/PAQUETES";
           ?>
+          <button type="button" id="cobranza" value="<?= $cobranzaDefault['idForma']; ?>" hidden></button>
           <button type="button" onClick = 'location.href = "#";' class="btn btn-primary" id="cdisciplina">CONFIGURACIÓN POR DISCIPLINA</button>
           <button type="button" onClick = 'location.href = "#";' class="btn btn-info" id="cequipos">CONFIGURACIÓN POR EQUIPOS/PAQUETES</button>
           <button type="button" onClick = 'location.href = "#";' class="btn btn-info" id="cobro">COBRO POR GRUPOS</button>
@@ -244,8 +246,11 @@
   </div>
   <?php include 'templates/bottom.php'; ?>
   <script>
-      $(document).ready(function () {
-      if($('#cClases').prop('checked')){
+  $(document).ready(function ()
+  {
+      var x = $('#cobranza').val();
+      if(x == 2)
+      {
             Utilizer.loadSelect('idCalculoPagos', 'formaCalculoClases', 'Forma Cálculo', {}, setPorGrupos);
         $('#tipoSelect').val('1');
         $('#titulo').html('COBRANZA POR GRUPOS');
@@ -254,7 +259,9 @@
         $('#tipoCobranza').addClass('hidden');
         $('#configurar2').removeClass('hidden');
         $('#vprincipal').removeClass('hidden');      
-      } else {
+      }
+
+      else {
         $('#cClases').prop('checked',false);
         $('#configurar2').addClass('hidden');
         $('#configuracionActual').prop('hidden',true);
@@ -269,7 +276,7 @@
         $('#vprincipal').removeClass('hidden');
             Utilizer.loadSelect('idCalculoPagos', 'formaCalculoSelectDisciplina', 'Forma Cálculo', {}, setSelected);
             Utilizer.loadSelect('idDisciplinas', 'disciplinaSelect', 'Disciplinas',{},setSelected);  
-      } 
+      }
       $('#cdisciplina').click(function(){
         $('#cClases').prop('checked',false);
         $('#configurar2').addClass('hidden');
@@ -300,10 +307,17 @@
             Utilizer.loadSelect('idCalculoPagos', 'formaCalculoSelect', 'Forma Cálculo', {}, setEquipos);
             Utilizer.loadSelect('idEquipos', 'equipoSelect', 'Equipos');    
       });
+
+
+
+
+
       $('#cobro').click(function()
       {
         Utilizer.loadSelect('idCalculoPagos', 'formaCalculoClases', 'Forma Cálculo', {}, setPorGrupos);
-        /*if($(this).prop('checked')){*/
+        /*  var x = $('#cobranza').val();
+        if(x == 2)
+        {*/
               $('#tipoSelect').val('1');
               $('#titulo').html('COBRANZA POR GRUPOS');
               $('#div_equipo').addClass('hidden');
@@ -312,7 +326,8 @@
               $('#tipoCobranza').addClass('hidden');
               $('#configurar2').removeClass('hidden');
               $('#vprincipal').removeClass('hidden');
-              /*} else {
+        /*}
+        else {
                   $('#titulo').html('&nbsp;');
                   $('#div_equipo').addClass('hidden');
                   $('#div_disciplina').addClass('hidden');
@@ -321,6 +336,10 @@
                   Utilizer.loadSelect('idCalculoPagos', 'formaCalculoClases', 'Forma Cálculo', {}, setSelected);
               }*/
       });
+
+
+
+
             var idCalculoPagosActual = 0;
             function setSelected() {
               var sel = {};
