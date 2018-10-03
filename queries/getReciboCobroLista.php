@@ -41,30 +41,39 @@
 				$respuesta[$k]['alumno'] = $nombre['nombre'];
 				if($v['nombreConcepto']===null){
 					$texto = "";
-					if($detallesCobro['cuotaEquipo']!="0.00"){$texto = "Cuota Equipo";}else{
-					switch($infoCobros['idCalculoPagos']){
+					if($detallesCobro['idEquipo']!=null){
+						$texto = "Cuota Equipo";
+						$dataEquipo = select_query_one($con, "SELECT nombreEquipo FROM equipos WHERE idEquipo = ?", 'i', [$detallesCobro['idEquipo']]);
+				    $texto = "Cuota Mensual Equipo/Paquete: ".$dataEquipo['nombreEquipo'];
+					}else{
+					switch($infoCobros['idCalculoPagoUsado']){
 						case 1: //Cuota Fija Mensual Por Disciplina
 							$texto = "";
-							$disciplina = select_query_one($con, "SELECT nombreDisciplina FROM disciplinas WHERE idDisciplina = ?", 'i', [$detallesCobro['idDisciplina']]);
-							$texto = "Disciplina: ".$disciplina['nombreDisciplina'];
+							$disciplina = select_query_one($con, "SELECT nombreDisciplina FROM disciplinas WHERE idDisciplina = ?", 'i', [$infoCobros['idDisciplina']]);
+							$texto = "Cuota Mensual por la Disciplina: ".$disciplina['nombreDisciplina'];
 						break;
 						case 2: //Cuota Mensual Por Clase
-							$grupo = select_query_one($con, "SELECT nombreGrupo FROM grupos WHERE idGrupo = ?", 'i', [$detallesCobro['idGrupo']]);
+							$grupo = select_query_one($con, "SELECT nombreGrupo FROM grupos WHERE idGrupo = ?", 'i', [$infoCobros['idClase']]);
 							$texto = $grupo['nombreGrupo'];
 						break;
 						case 3: //Cuota Por Días
-							$texto = "";
-							$dias = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
-							if(isset($detallesCobro['idClase'])){
-								$grupo = select_query_one($con, "SELECT nombreGrupo FROM grupos WHERE idGrupo = ?", 'i', [$detallesCobro['idClase']]);
-								$listaDias = $detallesCobro['dias'];
-								$texto = $grupo['nombreGrupo']." ($listaDias dias)";
-							}
+						$texto = "";
+						$dias = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+						$disciplina = select_query_one($con, "SELECT nombreDisciplina FROM disciplinas WHERE idDisciplina = ?", 'i', [$infoCobros['idDisciplina']]);
+						if(isset($detallesCobro['idClase'])){
+							//$disciplina = select_query_one($con, "SELECT nombreDisciplina FROM disciplinas WHERE idDisciplina = ?", 'i', [$detallesCobro['idDisciplina']]);
+							$grupo = select_query_one($con, "SELECT nombreGrupo FROM grupos WHERE idGrupo = ?", 'i', [$detallesCobro['idClase']]);
+							$listaDias = $detallesCobro['dias'];
+							$texto = $grupo['nombreGrupo']." (".$disciplina['nombreDisciplina'].") - ".$listaDias." dias";
+						}else{
+							$listaDias = $detallesCobro['dias'];
+							$texto = "Total dias (".$disciplina['nombreDisciplina']."): - ".$listaDias." dias";
+						}
 						break;
 						case 4: //Cuota Por Veces A La Semana Por Disciplina
 							$texto = "";
-							$disciplina = select_query_one($con, "SELECT nombreDisciplina FROM disciplinas WHERE idDisciplina = ?", 'i', [$detallesCobro['idDisciplina']]);
-							if(isset($detallesCobro['idGrupo'])){
+							$disciplina = select_query_one($con, "SELECT nombreDisciplina FROM disciplinas WHERE idDisciplina = ?", 'i', [$infoCobros['idDisciplina']]);
+							if(isset($detallesCobro['idClase'])){
 								$grupo = select_query_one($con, "SELECT nombreGrupo FROM grupos WHERE idGrupo = ?", 'i', [$detallesCobro['idClase']]);
 								$texto = $grupo['nombreGrupo']." (".$disciplina['nombreDisciplina'].") ".$detallesCobro['veces']." ve".($detallesCobro['veces']>1?'ces':'z')." a la semana";
 							}else{
@@ -73,9 +82,9 @@
 						break;
 						case 5: //Cuota Por Total de Horas Semanales Por Disciplina
 						$texto = "";
-						$disciplina = select_query_one($con, "SELECT nombreDisciplina FROM disciplinas WHERE idDisciplina = ?", 'i', [$detallesCobro['idDisciplina']]);
-						if(isset($detallesCobro['idGrupo'])){
-							$detallesCobro['horas'] = $detallesCobro['horas']/2;
+						$disciplina = select_query_one($con, "SELECT nombreDisciplina FROM disciplinas WHERE idDisciplina = ?", 'i', [$infoCobros['idDisciplina']]);
+						if(isset($detallesCobro['idClase'])){
+							$detallesCobro['horas'] = $detallesCobro['horas'];
 							$grupo = select_query_one($con, "SELECT nombreGrupo FROM grupos WHERE idGrupo = ?", 'i', [$detallesCobro['idClase']]);
 							$texto = $grupo['nombreGrupo']." (".$disciplina['nombreDisciplina']."): ".$detallesCobro['horas']." hora".($detallesCobro['horas']>1?'s':'')." a la semana";
 						}else{

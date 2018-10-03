@@ -20,6 +20,7 @@
           <th class="table-column-title">CLASE-NIVEL</th>
           <th class="table-column-title">DISCIPLINA</th>
           <th class="table-column-title">HORARIO</th>
+          <th class="table-column-title">TOTAL HRS SEMANA</th>
           <th class="table-column-title ">NÚMERO MÁXIMO DE ALUMNOS</th>
           <th class="table-column-title ordenar" data-order-dir = "desc">NÚMERO DE ALUMNOS INSCRITOS</th>
           <th class="table-column-title">ACCIONES</th>
@@ -32,6 +33,7 @@
           <th class="table-column-title">CLASE-NIVEL</th>
           <th class="table-column-title">DISCIPLINA</th>
           <th class="table-column-title">HORARIO</th>
+          <th class="table-column-title">TOTAL HRS SEMANA</th>
           <th class="table-column-title ">NÚMERO MÁXIMO DE ALUMNOS</th>
           <th class="table-column-title">NÚMERO DE ALUMNOS INSCRITOS</th>
           <th class="table-column-title">ACCIONES</th>
@@ -375,7 +377,7 @@
 });
 
         tableUtilities.createTable('gruposVer', ['nombreGrupo', 'profesorPrincipal', 'nombreClase', 'nombreDisciplina',
-         'horario', 'numMaxAlumnos', 'alumnosInscritos', 'acciones'], ['profesorPrincipal','nombreAsignatura - Nivel', 'nombreDisciplina']);
+         'horario', 'horas', 'numMaxAlumnos', 'alumnosInscritos', 'acciones'], ['profesorPrincipal','nombreAsignatura - Nivel', 'nombreDisciplina']);
         tableUtilities.setUniqueColumns('gruposVer', ['idGrupo']);
         tableUtilities.createTable('gruposDetallesVer', [{
             key:'selected',
